@@ -31,4 +31,6 @@ public interface IABB {
 	public String getInOrder();
 
 	public Object buscar(IKey objeto);
+
+	public void vaciar();
 }

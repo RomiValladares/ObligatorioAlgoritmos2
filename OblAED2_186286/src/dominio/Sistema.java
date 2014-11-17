@@ -1,5 +1,7 @@
 package dominio;
 
+import java.util.ArrayList;
+
 import dominio.TipoRetorno.TipoError;
 import dominio.clases.Apiario;
 import dominio.clases.Apicultor;

@@ -12,9 +12,11 @@ public class TestObligatorio {
 	@Test
 	public void testInicializarDestruirSistema() {
 		Sistema s = new Sistema();
-		s.inicializarSistema(1);
+		assertEquals(TipoError.ERROR_1, s.inicializarSistema(0).retorno);
 		s.destruirSistema();
-		s.inicializarSistema(1);
+		assertEquals(TipoError.OK, s.inicializarSistema(3).retorno);
+		s.destruirSistema();
+		assertEquals(TipoError.OK, s.inicializarSistema(2).retorno);
 	}
 
 	// Tests Apicultores
@@ -216,8 +218,8 @@ public class TestObligatorio {
 		assertEquals(TipoError.OK, s.registrarCentro("C5", -3.31, -58.0759192, 5).retorno);
 
 		TipoRetorno retorno = s.listadoDeCentros();
-		//System.out.println(retorno.valorString);
-		//fail("Not yet implemented");
+		// System.out.println(retorno.valorString);
+		// fail("Not yet implemented");
 	}
 
 	//
@@ -233,7 +235,6 @@ public class TestObligatorio {
 		s.registrarCiudad("Trinidad", -33.5198572, -56.8987083);
 		s.registrarCiudad("Durazno", -33.3851666, -56.5568255);
 		s.registrarCiudad("Dolores", -33.5351509, -58.2167245);
-
 
 	}
 
