@@ -25,5 +25,9 @@ public class Ciudad extends PuntoMapa {
 		return otroObj.getNombre().compareTo(getNombre());
 	}
 
+	@Override
+	public String toString() {
+		return super.toString() + getSeparadorCampos() + nombre;
+	}
 
 }
