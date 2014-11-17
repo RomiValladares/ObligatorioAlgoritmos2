@@ -85,18 +85,22 @@ public class Sistema {
 	public TipoRetorno registrarApiario(String nombre, Double coordX, Double coordY, String cedula_apicultor, int capacidad) {
 		/*
 		 * Errores posibles:
-		 * 1. Si capacidad es menor o igual a 0.
-		 * 2. Si el punto de coordenadas coordX, coordY ya esta registrado en el
+		 * 1. Si en el sistema ya hay registrados cantPuntos puntos.
+		 * 2. Si capacidad es menor o igual a 0.
+		 * 3. Si el punto de coordenadas coordX, coordY ya esta registrado en el
 		 * sistema.
-		 * 3. Si el apicultor de cedula cedula_apicultor no existe en el
+		 * 4. Si el apicultor de cedula cedula_apicultor no existe en el
 		 * sistema.
 		 */
+		
+		/* TODO punto 1*/
+		
 		if (capacidad <= 0)
-			return new TipoRetorno(TipoError.ERROR_1);
-		if (coordenadasMapa.pertenece(new PuntoMapa(coordX, coordY)))
 			return new TipoRetorno(TipoError.ERROR_2);
-		if (apicultores.existeElemento(new Apicultor(cedula_apicultor)))
+		if (coordenadasMapa.pertenece(new PuntoMapa(coordX, coordY)))
 			return new TipoRetorno(TipoError.ERROR_3);
+		if (apicultores.existeElemento(new Apicultor(cedula_apicultor)))
+			return new TipoRetorno(TipoError.ERROR_4);
 
 		Apiario nuevoApiario = new Apiario(coordX, coordY, nombre, capacidad);
 		Apicultor responsableNuevoApiario = (Apicultor) apicultores.buscar(new Apicultor(cedula_apicultor));
