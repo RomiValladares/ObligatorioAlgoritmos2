@@ -144,7 +144,7 @@ public class Sistema {
 		if(!coordenadasMapa.pertenece(new PuntoMapa(coordXi, coordYi)) || !coordenadasMapa.pertenece(new PuntoMapa(coordXf, coordYf)))
 			return new TipoRetorno(TipoError.ERROR_2);
 		
-		/*if(existeTramo(coordXi, coordYi, coordXf, coordYf))
+		/*if(existeTramo(coordXi, coordYi, coordXf, coordYf)) // TODO michael
 			return new TipoRetorno(TipoError.ERROR_3);
 		*/
 		
@@ -163,6 +163,9 @@ public class Sistema {
 		 * 2. Si no encuentra ningún centro de extracción que pueda satisfacer
 		 * la necesidad de extracción de los colmenares.
 		 */
+		if (coordenadasMapa.pertenece(new PuntoMapa(coordX, coordY)))
+			return new TipoRetorno(TipoError.ERROR_1);
+		
 		return new TipoRetorno(TipoError.NO_IMPLEMENTADA);
 	}
 
