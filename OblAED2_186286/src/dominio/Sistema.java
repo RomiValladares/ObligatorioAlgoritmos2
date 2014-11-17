@@ -109,20 +109,24 @@ public class Sistema {
 	public TipoRetorno registrarCentro(String nombre, Double coordX, Double coordY, int capacidad) {
 		/*
 		 * Errores posibles:
-		 * 1. Si capacidad es menor o igual a 0.
-		 * 2. Si el punto de coordenadas coordX, coordY ya esta registrado en el
-		 * sistema.
+		 	1. Si en el sistema ya hay registrados cantPuntos puntos.
+		 	2. Si capacidad es menor o igual a 0.
+			3. Si el punto de coordenadas coordX, coordY ya está registrado en el sistema. 
 		 */
+		/* TODO punto 1*/
+		
 		if (capacidad <= 0)
-			return new TipoRetorno(TipoError.ERROR_1);
-		if (coordenadasMapa.pertenece(new PuntoMapa(coordX, coordY)))
 			return new TipoRetorno(TipoError.ERROR_2);
+		if (coordenadasMapa.pertenece(new PuntoMapa(coordX, coordY)))
+			return new TipoRetorno(TipoError.ERROR_3);
 
 		Centro nuevoCentro = new Centro(coordX, coordY, nombre, capacidad);
 		coordenadasMapa.insertar(nuevoCentro);
 		// TODO insertar en grafo
 		return new TipoRetorno(TipoError.OK);
 	}
+	
+	/*TODO michael*/
 
 	public TipoRetorno registrarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int peso) {
 		/*
@@ -131,6 +135,15 @@ public class Sistema {
 		 * 2. Si no existe coordi o coordf.
 		 * 3. Si ya existe un tramo registrado desde coordi a coordf.
 		 */
+		if(peso <= 0)
+			return new TipoRetorno(TipoError.ERROR_1);
+		if(!coordenadasMapa.pertenece(new PuntoMapa(coordXi, coordYi)) || !coordenadasMapa.pertenece(new PuntoMapa(coordXf, coordYf)))
+			return new TipoRetorno(TipoError.ERROR_2);
+		
+		/*if(existeTramo(coordXi, coordYi, coordXf, coordYf))
+			return new TipoRetorno(TipoError.ERROR_3);
+		*/
+		
 		return new TipoRetorno(TipoError.NO_IMPLEMENTADA);
 	}
 
@@ -152,6 +165,8 @@ public class Sistema {
 	public TipoRetorno listadoDeApiariosEnCiudad(Double coordX, Double coordY) {
 		return new TipoRetorno(TipoError.NO_IMPLEMENTADA);
 	}
+	
+	/* EO michael */
 
 	public TipoRetorno listadoDeCentros() {
 		TipoRetorno retorno = new TipoRetorno(TipoError.OK);
