@@ -93,8 +93,8 @@ public class Sistema {
 		 * sistema.
 		 */
 		
-		/* TODO punto 1*/
-		
+		if (coordenadasMapa.isFull())
+			return new TipoRetorno(TipoError.ERROR_1);
 		if (capacidad <= 0)
 			return new TipoRetorno(TipoError.ERROR_2);
 		if (coordenadasMapa.pertenece(new PuntoMapa(coordX, coordY)))
@@ -117,8 +117,8 @@ public class Sistema {
 		 	2. Si capacidad es menor o igual a 0.
 			3. Si el punto de coordenadas coordX, coordY ya está registrado en el sistema. 
 		 */
-		/* TODO punto 1*/
-		
+		if (coordenadasMapa.isFull())
+			return new TipoRetorno(TipoError.ERROR_1);		
 		if (capacidad <= 0)
 			return new TipoRetorno(TipoError.ERROR_2);
 		if (coordenadasMapa.pertenece(new PuntoMapa(coordX, coordY)))
