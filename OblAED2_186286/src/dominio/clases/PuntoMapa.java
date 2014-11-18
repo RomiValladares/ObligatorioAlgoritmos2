@@ -1,9 +1,10 @@
 package dominio.clases;
 
 import dominio.Sistema;
+import estructuras.hash.HashTablaAbierta.IteradorHash;
 
 public class PuntoMapa implements IKey {
-	private final static String urlGoogleMapsStatic = "https://maps.googleapis.com/maps/api/staticmap?size=1200x600&maptype=roadmap&markers=";// +parametros
+	private final static String urlGoogleMapsStatic = "https://maps.googleapis.com/maps/api/staticmap?size=1200x600&maptype=roadmap";// +parametros
 
 	private Double coordX, coordY;
 	private Sistema.TipoPunto tipoPunto;
@@ -108,23 +109,28 @@ public class PuntoMapa implements IKey {
 		return "markers=color:" + colorPunto + "%7C" + coordX + "," + coordY;
 	}
 
+	public static String getGoogleMapUrl(IteradorHash it) {
+		String retorno = urlGoogleMapsStatic;
+		while (it.getNodoActual() != null) {
+			Object obj = it.getNodoActual().getObj();
+			if (obj instanceof PuntoMapa) {
+				PuntoMapa puntoActual = (PuntoMapa) obj;
+				retorno += "&" + puntoActual.toGoogleMapMarker();
+			}
+			it.proximoNodo();
+		}
+		return retorno;
+	}
+
 	public enum ColorPuntoMapa {
 		ROJO("red"), VERDE("green"), AMARILLO("yellow");
 
 		private final String text;
 
-		/**
-		 * @param text
-		 */
 		private ColorPuntoMapa(final String text) {
 			this.text = text;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.lang.Enum#toString()
-		 */
 		@Override
 		public String toString() {
 			return text;

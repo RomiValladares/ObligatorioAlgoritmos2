@@ -4,6 +4,7 @@ import java.math.BigInteger;
 
 import dominio.clases.IKey;
 import estructuras.lista.Lista;
+import estructuras.lista.NodoLista;
 import estructuras.lista.Lista.IteradorLista;
 
 public class HashTablaAbierta implements IDiccionario {
@@ -123,5 +124,71 @@ public class HashTablaAbierta implements IDiccionario {
 			i++;
 		}
 		return retorno;
+	}
+
+	public String listarElementosConIterador() {
+		String retorno = "";
+		if (contadorRegistros != 0) {
+			IteradorHash it = new IteradorHash(getPrimerElemento());
+			while (it.getNodoActual() != null) {
+				retorno += it.getNodoActual().getObj();
+				it.proximoNodo();
+			}
+		}
+		return retorno;
+	}
+
+	private NodoLista getPrimerElemento() {
+		int contadorAux = 0, i = 0;
+		NodoLista retorno = null;
+		while (i < TAMANO_T && contadorAux < contadorRegistros) {
+			if (tabla[i] != null) {
+				retorno = tabla[i].getIteradorLista().getNodoActual();
+			}
+			i++;
+		}
+		return retorno;
+	}
+
+	public IteradorHash getHashTablaAbierta() {
+		return new IteradorHash(getPrimerElemento());
+	}
+
+	public class IteradorHash {
+		private int contadorAux = 0, i = 0;
+		private IteradorLista iterador;
+		private NodoLista nodoActual;
+
+		private IteradorHash(NodoLista inicio) {
+			this.nodoActual = inicio;
+		}
+
+		public NodoLista proximoNodo() {
+			// si no hay un iterador o ya no hay mas elementos en el actual
+			if (iterador == null || iterador.getNodoActual() == null) {
+				// todavia hay elementos
+				if (i < TAMANO_T && contadorAux < contadorRegistros) {
+					while (i < TAMANO_T && tabla[i] == null)
+						// busca una posicion que tenga alguna lista
+						i++;
+					if (i < TAMANO_T && tabla[i] != null) {
+						iterador = tabla[i].getIteradorLista();
+						contadorAux++;
+						nodoActual = iterador.getNodoActual();
+						return nodoActual;
+					}
+					nodoActual = null;
+				}
+				nodoActual = null;
+			} else {
+				nodoActual = iterador.proximoNodo();
+				return nodoActual;
+			}
+			return nodoActual;
+		}
+
+		public NodoLista getNodoActual() {
+			return nodoActual;
+		}
 	}
 }
