@@ -11,4 +11,9 @@ public class Apiario extends PuntoMapa {
 		this.nombre = nombre;
 		this.capacidad = capacidad;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString() + getSeparadorCampos() + nombre + getSeparadorCampos() + capacidad;
+	}
 }

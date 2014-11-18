@@ -1,11 +1,15 @@
 package dominio.clases;
 
 import dominio.Sistema;
+import estructuras.hash.HashTablaAbierta.IteradorHash;
 
 public class PuntoMapa implements IKey {
+	private final static String urlGoogleMapsStatic = "https://maps.googleapis.com/maps/api/staticmap?size=1200x600&maptype=roadmap";// +parametros
+
 	private Double coordX, coordY;
 	private Sistema.TipoPunto tipoPunto;
 	private static String separadorCampos = ";";
+	private ColorPuntoMapa colorPunto;
 
 	public PuntoMapa(Double coordX, Double coordY) {
 		this.coordX = coordX;
@@ -15,6 +19,17 @@ public class PuntoMapa implements IKey {
 	public PuntoMapa(Double coordX, Double coordY, Sistema.TipoPunto tipoPunto) {
 		this(coordX, coordY);
 		this.tipoPunto = tipoPunto;
+		switch (tipoPunto) {
+		case APIARIO:
+			this.colorPunto = ColorPuntoMapa.AMARILLO;
+			break;
+		case CIUDAD:
+			this.colorPunto = ColorPuntoMapa.ROJO;
+			break;
+		case CENTRO_EXTRACCION:
+			this.colorPunto = ColorPuntoMapa.VERDE;
+			break;
+		}
 	}
 
 	public Double getCoordX() {
@@ -89,4 +104,37 @@ public class PuntoMapa implements IKey {
 	public static String getSeparadorCampos() {
 		return separadorCampos;
 	}
+
+	public final String toGoogleMapMarker() {
+		return "markers=color:" + colorPunto + "%7C" + coordX + "," + coordY;
+	}
+
+	public static String getGoogleMapUrl(IteradorHash it) {
+		String retorno = urlGoogleMapsStatic;
+		while (it.getNodoActual() != null) {
+			Object obj = it.getNodoActual().getObj();
+			if (obj instanceof PuntoMapa) {
+				PuntoMapa puntoActual = (PuntoMapa) obj;
+				retorno += "&" + puntoActual.toGoogleMapMarker();
+			}
+			it.proximoNodo();
+		}
+		return retorno;
+	}
+
+	public enum ColorPuntoMapa {
+		ROJO("red"), VERDE("green"), AMARILLO("yellow");
+
+		private final String text;
+
+		private ColorPuntoMapa(final String text) {
+			this.text = text;
+		}
+
+		@Override
+		public String toString() {
+			return text;
+		}
+	}
+
 }

@@ -1,5 +1,9 @@
 package dominio;
 
+import java.awt.Desktop;
+import java.net.URI;
+import java.util.ArrayList;
+
 import dominio.TipoRetorno.TipoError;
 import dominio.clases.Apiario;
 import dominio.clases.Apicultor;
@@ -11,6 +15,7 @@ import estructuras.arbol.IABB;
 import estructuras.grafo.GrafoMatriz;
 import estructuras.grafo.IGrafo;
 import estructuras.hash.HashTablaAbierta;
+import estructuras.hash.HashTablaAbierta.IteradorHash;
 import estructuras.hash.IDiccionario;
 
 public class Sistema {
@@ -20,7 +25,7 @@ public class Sistema {
 	};
 
 	private IABB apicultores;
-	private IDiccionario coordenadasMapa;
+	private HashTablaAbierta coordenadasMapa;
 	private IGrafo puntosMapa;
 
 	public TipoRetorno inicializarSistema(int cantPuntos) {
@@ -92,7 +97,7 @@ public class Sistema {
 		 * 4. Si el apicultor de cedula cedula_apicultor no existe en el
 		 * sistema.
 		 */
-		
+
 		if (coordenadasMapa.isFull())
 			return new TipoRetorno(TipoError.ERROR_1);
 		if (capacidad <= 0)
@@ -113,12 +118,13 @@ public class Sistema {
 	public TipoRetorno registrarCentro(String nombre, Double coordX, Double coordY, int capacidad) {
 		/*
 		 * Errores posibles:
-		 	1. Si en el sistema ya hay registrados cantPuntos puntos.
-		 	2. Si capacidad es menor o igual a 0.
-			3. Si el punto de coordenadas coordX, coordY ya está registrado en el sistema. 
+		 * 1. Si en el sistema ya hay registrados cantPuntos puntos.
+		 * 2. Si capacidad es menor o igual a 0.
+		 * 3. Si el punto de coordenadas coordX, coordY ya está registrado en el
+		 * sistema.
 		 */
 		if (coordenadasMapa.isFull())
-			return new TipoRetorno(TipoError.ERROR_1);		
+			return new TipoRetorno(TipoError.ERROR_1);
 		if (capacidad <= 0)
 			return new TipoRetorno(TipoError.ERROR_2);
 		if (coordenadasMapa.pertenece(new PuntoMapa(coordX, coordY)))
@@ -129,8 +135,8 @@ public class Sistema {
 		// TODO insertar en grafo
 		return new TipoRetorno(TipoError.OK);
 	}
-	
-	/*TODO michael*/
+
+	/* TODO michael */
 
 	public TipoRetorno registrarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int peso) {
 		/*
@@ -139,20 +145,25 @@ public class Sistema {
 		 * 2. Si no existe coordi o coordf.
 		 * 3. Si ya existe un tramo registrado desde coordi a coordf.
 		 */
-		if(peso <= 0)
+		if (peso <= 0)
 			return new TipoRetorno(TipoError.ERROR_1);
-		if(!coordenadasMapa.pertenece(new PuntoMapa(coordXi, coordYi)) || !coordenadasMapa.pertenece(new PuntoMapa(coordXf, coordYf)))
+		if (!coordenadasMapa.pertenece(new PuntoMapa(coordXi, coordYi)) || !coordenadasMapa.pertenece(new PuntoMapa(coordXf, coordYf)))
 			return new TipoRetorno(TipoError.ERROR_2);
-		
-		/*if(existeTramo(coordXi, coordYi, coordXf, coordYf)) // TODO michael
-			return new TipoRetorno(TipoError.ERROR_3);
-		*/
-		
+
+		/*
+		 * if(existeTramo(coordXi, coordYi, coordXf, coordYf)) // TODO michael
+		 * return new TipoRetorno(TipoError.ERROR_3);
+		 */
+
 		return new TipoRetorno(TipoError.NO_IMPLEMENTADA);
 	}
 
 	public TipoRetorno mapaEstado() {
-		return new TipoRetorno(TipoError.NO_IMPLEMENTADA);
+		TipoRetorno retorno = new TipoRetorno(TipoError.OK);
+		String urlMaps = getUrlGoogleMaps();
+		retorno.valorString = urlMaps;
+		openWebpage(urlMaps);
+		return retorno;
 	}
 
 	public TipoRetorno rutaACentroMasCercano(Double coordX, Double coordY) {
@@ -169,14 +180,14 @@ public class Sistema {
 		// TODO michael error 2
 		
 		// TODO michael OK
-		
+
 		return new TipoRetorno(TipoError.NO_IMPLEMENTADA);
 	}
 
 	public TipoRetorno listadoDeApiariosEnCiudad(Double coordX, Double coordY) {
 		return new TipoRetorno(TipoError.NO_IMPLEMENTADA);
 	}
-	
+
 	/* EO michael */
 
 	public TipoRetorno listadoDeCentros() {
@@ -191,4 +202,18 @@ public class Sistema {
 		return retorno;
 	}
 
+	private String getUrlGoogleMaps() {
+		return PuntoMapa.getGoogleMapUrl(coordenadasMapa.getHashTablaAbierta());
+	}
+
+	private void openWebpage(String uri) {
+		Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+			try {
+				desktop.browse(new URI(uri));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

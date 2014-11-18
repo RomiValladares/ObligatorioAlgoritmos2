@@ -18,8 +18,8 @@ public class ArbolBinarioBusqueda implements IABB {
 		return getRaiz() == null;
 	}
 
-	/* Make the tree logically empty */
-	public void clear() {
+	@Override
+	public void vaciar() {
 		setRoot(null);
 	}
 
