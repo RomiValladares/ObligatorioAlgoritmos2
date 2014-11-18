@@ -1,6 +1,6 @@
 package estructuras.grafo;
 
-public class ArcoGrafo {
+public class ArcoGrafo implements IArco {
 
 	public boolean existe;
 	private int peso;

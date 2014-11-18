@@ -27,13 +27,13 @@ public interface IGrafo {
 	public ILista verticesAdyacentes(int v);
 
 	// Pre: a y b son vértices del grafo
-	// Post: Retorna true sii los vértices a y b son adyacentes.
+	// Post: Retorna true si los vértices a y b son adyacentes.
 	public boolean sonAdyacentes(int a, int b);
 
-	// Post: Retorna true sii el vértice fue ingresado al grafo
+	// Post: Retorna true si el vértice fue ingresado al grafo
 	public boolean estaVertice(int v);
 
-	// Post: Retorna true sii el grafo esta vacío
+	// Post: Retorna true si el grafo esta vacío
 	public boolean esVacio();
 
 }

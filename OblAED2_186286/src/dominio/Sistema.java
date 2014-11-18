@@ -166,6 +166,10 @@ public class Sistema {
 		if (coordenadasMapa.pertenece(new PuntoMapa(coordX, coordY)))
 			return new TipoRetorno(TipoError.ERROR_1);
 		
+		// TODO michael error 2
+		
+		// TODO michael OK
+		
 		return new TipoRetorno(TipoError.NO_IMPLEMENTADA);
 	}
 
