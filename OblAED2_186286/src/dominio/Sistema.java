@@ -159,20 +159,26 @@ public class Sistema {
 			return new TipoRetorno(TipoError.ERROR_1);
 		if (!coordenadasMapa.pertenece(new PuntoMapa(coordXi, coordYi)) || !coordenadasMapa.pertenece(new PuntoMapa(coordXf, coordYf)))
 			return new TipoRetorno(TipoError.ERROR_2);
-
-		/*
-		 * if(existeTramo(coordXi, coordYi, coordXf, coordYf)) // TODO michael
-		 * return new TipoRetorno(TipoError.ERROR_3);
-		 */
 		
+		// si esta todo bien buscamos los datos con las coord de los puntos:
 		Object datoInicio = coordenadasMapa.encontrar(new PuntoMapa(coordXi, coordYi)); // PUNTERO al inicio
 		Object datoFinal = coordenadasMapa.encontrar(new PuntoMapa(coordXf, coordYf)); // PUNTERO al final
 		
-		puntosMapa.agregarArista(puntosMapa.obtenerPosVertice(datoInicio), puntosMapa.obtenerPosVertice(datoFinal), peso);
+		// obtenemos la posicion en la matriz a traves del dato:
+		int puntoInicio = puntosMapa.obtenerPosVertice(datoInicio);
+		int puntoFinal = puntosMapa.obtenerPosVertice(datoFinal);
+		
+		// verificamos que no exista
+		if(puntosMapa.existeArista(puntoInicio, puntoFinal)){
+			return new TipoRetorno(TipoError.ERROR_3);
+		}
+		
+		// agregamos arista:
+		puntosMapa.agregarArista(puntoInicio, puntoFinal, peso);
 		
 		Tramo tramo = new Tramo(datoInicio, datoFinal, peso);
 
-		return new TipoRetorno(TipoError.NO_IMPLEMENTADA);
+		return new TipoRetorno(TipoError.OK);
 	}
 
 	public TipoRetorno mapaEstado() {

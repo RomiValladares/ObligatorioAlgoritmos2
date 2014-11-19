@@ -11,7 +11,11 @@ public interface IGrafo {
 	// pre: el dato existe en la matriz
 	// post: retorna la posicion (int) del dato en la matriz
 	public int obtenerPosVertice(Object dato);
-
+	
+	// pre: origen y destino son posiciones validas
+	// post: retorna true si la arista de origen origen y destino destino existe, 
+	//en caso contraro retorna false
+	public boolean existeArista(int origen, int destino);
 	// Pre: origen y destino son los índices de vértices ya ingresados en el
 	// grafo
 	// Post: Agrega la arista origen-destino de peso "peso" en el grafo

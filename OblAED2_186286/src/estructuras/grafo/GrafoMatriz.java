@@ -40,6 +40,13 @@ public class GrafoMatriz implements IGrafo {
 		ArcoGrafo nuevo = new ArcoGrafo(peso);
 		this.matrizAdyacencia[origen][destino] = nuevo;
 	}
+	
+	public boolean existeArista(int origen, int destino) {
+		if(this.matrizAdyacencia[origen][destino] != null)
+			return true;
+		else
+			return false;
+	}
 
 	public void agregarVertice(Object dato) {
 		listaVertices[size] = dato;

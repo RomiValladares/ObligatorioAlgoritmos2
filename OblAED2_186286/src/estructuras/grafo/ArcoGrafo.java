@@ -4,7 +4,6 @@ public class ArcoGrafo {
 
 	public boolean existe;
 	private int peso;
-	IArco dato;
 
 	public ArcoGrafo() {
 		this.existe = false;
@@ -17,6 +16,6 @@ public class ArcoGrafo {
 	}
 	
 	public int getPeso(){
-		return dato == null ? peso: dato.getPeso();
+		return peso;
 	}
 }

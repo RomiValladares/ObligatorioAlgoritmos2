@@ -282,7 +282,18 @@ public class TestObligatorio {
 		assertEquals(TipoError.ERROR_2, s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, 2).retorno);
 	}
 	
-	// TODO: falta intentar registrar un tramo existente
+	@Test
+	public void registrarTramoExistente() {
+		Sistema s = new Sistema();
+		s.inicializarSistema(2);
+		
+		s.registrarCiudad("Paysandu", -32.3105104, -58.0759192);
+		s.registrarCiudad("Salto", -31.3689985, -57.9119238);
+		
+		s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, 2);
+		
+		assertEquals(TipoError.ERROR_3, s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, 5).retorno);
+	}
 	
 	@Test
 	public void registrarTramoOk() {
@@ -292,9 +303,7 @@ public class TestObligatorio {
 		s.registrarCiudad("Paysandu", -32.3105104, -58.0759192);
 		s.registrarCiudad("Salto", -31.3689985, -57.9119238);
 		
-		s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, 2);
-		
-		assertEquals("noesta", "implementado");
+		assertEquals(TipoError.OK, s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, 2).retorno);
 	}
 	
 	// EO: tramo
