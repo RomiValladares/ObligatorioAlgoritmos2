@@ -225,6 +225,41 @@ public class TestObligatorio {
 		// System.out.println(retorno2);
 		// assertEquals(retorno, retorno2);
 	}
+	
+	// Tramo:
+	
+	@Test
+	public void registrarTramoPesoMenorIgual0() {
+		Sistema s = new Sistema();
+		s.inicializarSistema(10);
+		
+		s.registrarCiudad("Paysandu", -32.3105104, -58.0759192);
+		s.registrarCiudad("Salto", -31.3689985, -57.9119238);
+		
+		
+		assertEquals(TipoError.ERROR_1, s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, -3).retorno);
+	}
+	
+	@Test
+	public void registrarTramoOk() {
+		Sistema s = new Sistema();
+		s.inicializarSistema(10);
+		
+		s.registrarCiudad("Paysandu", -32.3105104, -58.0759192);
+		s.registrarCiudad("Salto", -31.3689985, -57.9119238);
+		s.registrarCiudad("Young", -32.698367, -57.6356507);
+		s.registrarCiudad("Fray Bentos", -33.1291165, -58.2985057);
+		s.registrarCiudad("Mercedes", -33.2563781, -58.0360079);
+		s.registrarCiudad("Trinidad", -33.5198572, -56.8987083);
+		s.registrarCiudad("Durazno", -33.3851666, -56.5568255);
+		s.registrarCiudad("Dolores", -33.5351509, -58.2167245);
+		
+		s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, 5);
+		
+		assertEquals("noesta", "implementado");
+	}
+	
+	// EO: tramo
 
 	//
 	//

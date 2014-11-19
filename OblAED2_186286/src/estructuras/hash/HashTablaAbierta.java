@@ -29,6 +29,14 @@ public class HashTablaAbierta implements IDiccionario {
 		}
 		return false;
 	}
+	
+	public Object encontrar(IKey n) {
+		int hash = getHash(n);
+		if (tabla[hash] != null) {
+			return tabla[hash].obtenerElemento(n);
+		}
+		return null;
+	}
 
 	@Override
 	public void borrar(IKey n) {

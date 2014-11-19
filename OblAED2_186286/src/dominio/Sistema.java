@@ -10,6 +10,7 @@ import dominio.clases.Apicultor;
 import dominio.clases.Centro;
 import dominio.clases.Ciudad;
 import dominio.clases.PuntoMapa;
+import dominio.clases.Tramo;
 import estructuras.arbol.ArbolBinarioBusqueda;
 import estructuras.arbol.IABB;
 import estructuras.grafo.GrafoMatriz;
@@ -154,6 +155,8 @@ public class Sistema {
 		 * if(existeTramo(coordXi, coordYi, coordXf, coordYf)) // TODO michael
 		 * return new TipoRetorno(TipoError.ERROR_3);
 		 */
+		
+		Tramo tramo = new Tramo(coordXi, coordYi, coordXf, coordYf, peso, coordenadasMapa);
 
 		return new TipoRetorno(TipoError.NO_IMPLEMENTADA);
 	}
@@ -179,7 +182,7 @@ public class Sistema {
 		
 		// TODO michael error 2
 		
-		// TODO michael OK
+		// TODO michael OK:
 
 		return new TipoRetorno(TipoError.NO_IMPLEMENTADA);
 	}
