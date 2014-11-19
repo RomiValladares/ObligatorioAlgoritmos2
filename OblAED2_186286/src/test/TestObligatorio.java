@@ -253,7 +253,7 @@ public class TestObligatorio {
 	}
 	
 	@Test
-	public void registrarTramoPosicionInicialNoExistente() {
+	public void registrarTramoPosInicialNoExiste() {
 		Sistema s = new Sistema();
 		s.inicializarSistema(10);
 		
@@ -264,7 +264,7 @@ public class TestObligatorio {
 	}
 	
 	@Test
-	public void registrarTramoPosicionFinalNoExistente() {
+	public void registrarTramoPosFinalNoExiste() {
 		Sistema s = new Sistema();
 		s.inicializarSistema(10);
 		
@@ -275,12 +275,14 @@ public class TestObligatorio {
 	}
 	
 	@Test
-	public void registrarTramoPosicionesNoExistentes() {
+	public void registrarTramoNingunaPosicionExiste() {
 		Sistema s = new Sistema();
 		s.inicializarSistema(10);
 		
 		assertEquals(TipoError.ERROR_2, s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, 5).retorno);
 	}
+	
+	// TODO: falta intentar registrar un tramo existente
 	
 	@Test
 	public void registrarTramoOk() {
@@ -289,12 +291,6 @@ public class TestObligatorio {
 		
 		s.registrarCiudad("Paysandu", -32.3105104, -58.0759192);
 		s.registrarCiudad("Salto", -31.3689985, -57.9119238);
-		s.registrarCiudad("Young", -32.698367, -57.6356507);
-		s.registrarCiudad("Fray Bentos", -33.1291165, -58.2985057);
-		s.registrarCiudad("Mercedes", -33.2563781, -58.0360079);
-		s.registrarCiudad("Trinidad", -33.5198572, -56.8987083);
-		s.registrarCiudad("Durazno", -33.3851666, -56.5568255);
-		s.registrarCiudad("Dolores", -33.5351509, -58.2167245);
 		
 		s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, 5);
 		
