@@ -29,7 +29,7 @@ public class HashTablaAbierta implements IDiccionario {
 		}
 		return false;
 	}
-	
+
 	public Object encontrar(IKey n) {
 		int hash = getHash(n);
 		if (tabla[hash] != null) {
@@ -139,7 +139,7 @@ public class HashTablaAbierta implements IDiccionario {
 		if (contadorRegistros != 0) {
 			IteradorHash it = new IteradorHash(getPrimerElemento());
 			while (it.getNodoActual() != null) {
-				retorno += it.getNodoActual().getObj();
+				retorno += it.getNodoActual().getObj() != null ? it.getNodoActual().getObj() + "|" : "";
 				it.proximoNodo();
 			}
 		}
@@ -173,12 +173,13 @@ public class HashTablaAbierta implements IDiccionario {
 
 		public NodoLista proximoNodo() {
 			// si no hay un iterador o ya no hay mas elementos en el actual
-			if (iterador == null || iterador.getNodoActual() == null) {
+			if (iterador == null || iterador.proximoNodo() == null) {
 				// todavia hay elementos
 				if (i < TAMANO_T && contadorAux < contadorRegistros) {
-					while (i < TAMANO_T && tabla[i] == null)
-						// busca una posicion que tenga alguna lista
-						i++;
+					do {
+						i++;					// busca una posicion que tenga alguna lista
+					} while (i < TAMANO_T && tabla[i] == null);
+
 					if (i < TAMANO_T && tabla[i] != null) {
 						iterador = tabla[i].getIteradorLista();
 						contadorAux++;
@@ -189,7 +190,7 @@ public class HashTablaAbierta implements IDiccionario {
 				}
 				nodoActual = null;
 			} else {
-				nodoActual = iterador.proximoNodo();
+				nodoActual = iterador.getNodoActual();
 				return nodoActual;
 			}
 			return nodoActual;
