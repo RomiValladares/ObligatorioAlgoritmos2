@@ -30,7 +30,6 @@ public class Dijkstra {
         F[s] = true;
         D[s] = null;
         
-        
         // Pasos para marcar los n-1 vértices
         for (int i = 0; i < n; i++) {
             //int v = minimo(); /* selecciona vértice no marcado  de menor distancia */ // TODO !!
@@ -64,15 +63,5 @@ public class Dijkstra {
         }
         return v;
     }
-    
-    /*public void ruta(int j){
-        if(j!=s){
-            ruta(ultimo[j]);
-            if(D[j] != GrafoMatriz.inf)
-                System.out.println("Se recorrio de "+ultimo[j]+" a "+j);
-            else
-                System.out.println("No se puede llegar a ese destino desde el origen: "+s);
-        }
-    }*/
     
 }
