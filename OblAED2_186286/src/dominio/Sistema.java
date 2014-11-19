@@ -146,8 +146,6 @@ public class Sistema {
 		return new TipoRetorno(TipoError.OK);
 	}
 
-	/* TODO michael */
-
 	public TipoRetorno registrarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int peso) {
 		/*
 		 * Errores posibles:
@@ -200,9 +198,9 @@ public class Sistema {
 		if (coordenadasMapa.pertenece(new PuntoMapa(coordX, coordY)))
 			return new TipoRetorno(TipoError.ERROR_1);
 		
-		// TODO michael error 2
+		// TODO error 2
 		
-		// TODO michael OK:
+		// TODO OK:
 
 		return new TipoRetorno(TipoError.NO_IMPLEMENTADA);
 	}
@@ -210,8 +208,6 @@ public class Sistema {
 	public TipoRetorno listadoDeApiariosEnCiudad(Double coordX, Double coordY) {
 		return new TipoRetorno(TipoError.NO_IMPLEMENTADA);
 	}
-
-	/* EO michael */
 
 	public TipoRetorno listadoDeCentros() {
 		TipoRetorno retorno = new TipoRetorno(TipoError.OK);
