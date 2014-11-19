@@ -84,7 +84,10 @@ public class Sistema {
 
 		Ciudad nuevaCiudad = new Ciudad(coordX, coordY, nombre);
 		coordenadasMapa.insertar(nuevaCiudad);
-		puntosMapa.agregarVertice();
+
+		Object dato = coordenadasMapa.encontrar(new PuntoMapa(coordX, coordY));
+		puntosMapa.agregarVertice(dato);
+		
 		return new TipoRetorno(TipoError.OK);
 	}
 
@@ -112,7 +115,10 @@ public class Sistema {
 		Apicultor responsableNuevoApiario = (Apicultor) apicultores.buscar(new Apicultor(cedula_apicultor));
 		responsableNuevoApiario.setApiario(nuevoApiario);
 		coordenadasMapa.insertar(nuevoApiario);
-		puntosMapa.agregarVertice();
+
+		Object dato = coordenadasMapa.encontrar(new PuntoMapa(coordX, coordY));
+		puntosMapa.agregarVertice(dato);
+		
 		return new TipoRetorno(TipoError.OK);
 	}
 
@@ -133,7 +139,10 @@ public class Sistema {
 
 		Centro nuevoCentro = new Centro(coordX, coordY, nombre, capacidad);
 		coordenadasMapa.insertar(nuevoCentro);
-		puntosMapa.agregarVertice();
+		
+		Object dato = coordenadasMapa.encontrar(new PuntoMapa(coordX, coordY));
+		puntosMapa.agregarVertice(dato);
+		
 		return new TipoRetorno(TipoError.OK);
 	}
 
@@ -156,7 +165,12 @@ public class Sistema {
 		 * return new TipoRetorno(TipoError.ERROR_3);
 		 */
 		
-		Tramo tramo = new Tramo(coordXi, coordYi, coordXf, coordYf, peso, coordenadasMapa);
+		Object datoInicio = coordenadasMapa.encontrar(new PuntoMapa(coordXi, coordYi)); // PUNTERO al inicio
+		Object datoFinal = coordenadasMapa.encontrar(new PuntoMapa(coordXf, coordYf)); // PUNTERO al final
+		
+		puntosMapa.agregarArista(puntosMapa.obtenerPosVertice(datoInicio), puntosMapa.obtenerPosVertice(datoFinal), peso);
+		
+		Tramo tramo = new Tramo(datoInicio, datoFinal, peso);
 
 		return new TipoRetorno(TipoError.NO_IMPLEMENTADA);
 	}

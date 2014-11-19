@@ -1,11 +1,16 @@
 package estructuras.grafo;
 
+import estructuras.hash.HashTablaAbierta;
 import estructuras.lista.ILista;
 
 public interface IGrafo {
 	// Pre: se agregó un elemento
 	// Post: Agrega un vertice al grafo
-	public void agregarVertice();
+	public void agregarVertice(Object dato);
+	
+	// pre: el dato existe en la matriz
+	// post: retorna la posicion (int) del dato en la matriz
+	public int obtenerPosVertice(Object dato);
 
 	// Pre: origen y destino son los índices de vértices ya ingresados en el
 	// grafo

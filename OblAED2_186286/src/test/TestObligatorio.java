@@ -287,7 +287,7 @@ public class TestObligatorio {
 	@Test
 	public void registrarTramoOk() {
 		Sistema s = new Sistema();
-		s.inicializarSistema(10);
+		s.inicializarSistema(2);
 		
 		s.registrarCiudad("Paysandu", -32.3105104, -58.0759192);
 		s.registrarCiudad("Salto", -31.3689985, -57.9119238);

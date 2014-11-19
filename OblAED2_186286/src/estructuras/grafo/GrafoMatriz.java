@@ -1,5 +1,7 @@
 package estructuras.grafo;
 
+import dominio.clases.PuntoMapa;
+import estructuras.hash.HashTablaAbierta;
 import estructuras.lista.ILista;
 import estructuras.lista.Lista;
 
@@ -17,6 +19,7 @@ public class GrafoMatriz implements IGrafo {
 	int cantNodos;
 	ArcoGrafo[][] matrizAdyacencia;
 	boolean[] nodosUsados;
+	Object[] listaVertices;
 
 	// Crea el grafo vacio (sin nodos ni aristas) con capacidad de
 	// almacenamiento de n vértices
@@ -24,12 +27,13 @@ public class GrafoMatriz implements IGrafo {
 		this.size = 0;
 		this.cantNodos = cantNodos;
 
-		this.matrizAdyacencia = new ArcoGrafo[cantNodos + 1][cantNodos + 1];
-		for (int i = 1; i <= cantNodos; i++)
-			for (int j = 1; j <= cantNodos; j++)
-				this.matrizAdyacencia[i][j] = new ArcoGrafo();
+		this.matrizAdyacencia = new ArcoGrafo[cantNodos][cantNodos];
+		for (int i = 1; i < cantNodos; i++)
+			for (int j = 1; j < cantNodos; j++)
+				this.matrizAdyacencia[i][j] = null;
 
-		this.nodosUsados = new boolean[cantNodos + 1];
+		this.nodosUsados = new boolean[cantNodos];
+		this.listaVertices = new Object[cantNodos];
 	}
 
 	public void agregarArista(int origen, int destino, int peso) {
@@ -37,9 +41,23 @@ public class GrafoMatriz implements IGrafo {
 		this.matrizAdyacencia[origen][destino] = nuevo;
 	}
 
-	public void agregarVertice() {
+	public void agregarVertice(Object dato) {
+		listaVertices[size] = dato;
 		this.nodosUsados[size] = true;
 		this.size++;
+	}
+	
+	public int obtenerPosVertice(Object dato) {
+		int pos = -1; // careful
+		
+		for(int i = 0; i<this.listaVertices.length; i++){
+			if(dato == listaVertices[i]){
+				pos = i;
+				return pos;
+			}
+		}
+		
+		return pos;
 	}
 
 	public void eliminarArista(int origen, int destino) {
@@ -53,8 +71,8 @@ public class GrafoMatriz implements IGrafo {
 
 		// Elimino las aristas donde v es miembro
 		for (int i = 1; i <= this.cantNodos; i++) {
-			this.matrizAdyacencia[i][v] = new ArcoGrafo();
-			this.matrizAdyacencia[v][i] = new ArcoGrafo();
+			this.matrizAdyacencia[i][v] = null;
+			this.matrizAdyacencia[v][i] = null;
 		}
 	}
 
