@@ -37,8 +37,8 @@ public class GrafoMatriz implements IGrafo {
 		this.matrizAdyacencia[origen][destino] = nuevo;
 	}
 
-	public void agregarVertice(int v) {
-		this.nodosUsados[v] = true;
+	public void agregarVertice() {
+		this.nodosUsados[size] = true;
 		this.size++;
 	}
 

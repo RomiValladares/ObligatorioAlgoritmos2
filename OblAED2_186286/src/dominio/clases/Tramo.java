@@ -13,10 +13,8 @@ public class Tramo implements IArco{ // no exstiende punto mapa
 	
 	public Tramo(Double pCoordXi, Double pCoordYi, Double pCoordXf, Double pCoordYf, int kilometros, HashTablaAbierta pHashTabla){
 		
-		this.inicio = pHashTabla.encontrar(new PuntoMapa(pCoordXi, pCoordYi));
-		this.fin = pHashTabla.encontrar(new PuntoMapa(pCoordXf, pCoordYf));
-		
-		// con x e y obtengo un puntero y xf e yf obtengo otro puntero
+		this.inicio = pHashTabla.encontrar(new PuntoMapa(pCoordXi, pCoordYi)); // PUNTERO al inicio
+		this.fin = pHashTabla.encontrar(new PuntoMapa(pCoordXf, pCoordYf)); // PUNTERO al final
 		
 		this.kilometros = kilometros;
 	}

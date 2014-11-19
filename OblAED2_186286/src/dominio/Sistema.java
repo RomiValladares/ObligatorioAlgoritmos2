@@ -84,7 +84,7 @@ public class Sistema {
 
 		Ciudad nuevaCiudad = new Ciudad(coordX, coordY, nombre);
 		coordenadasMapa.insertar(nuevaCiudad);
-		// TODO insertar en grafo
+		puntosMapa.agregarVertice();
 		return new TipoRetorno(TipoError.OK);
 	}
 
@@ -112,7 +112,7 @@ public class Sistema {
 		Apicultor responsableNuevoApiario = (Apicultor) apicultores.buscar(new Apicultor(cedula_apicultor));
 		responsableNuevoApiario.setApiario(nuevoApiario);
 		coordenadasMapa.insertar(nuevoApiario);
-		// TODO insertar en grafo
+		puntosMapa.agregarVertice();
 		return new TipoRetorno(TipoError.OK);
 	}
 
@@ -133,7 +133,7 @@ public class Sistema {
 
 		Centro nuevoCentro = new Centro(coordX, coordY, nombre, capacidad);
 		coordenadasMapa.insertar(nuevoCentro);
-		// TODO insertar en grafo
+		puntosMapa.agregarVertice();
 		return new TipoRetorno(TipoError.OK);
 	}
 

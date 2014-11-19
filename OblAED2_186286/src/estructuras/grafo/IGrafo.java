@@ -3,10 +3,9 @@ package estructuras.grafo;
 import estructuras.lista.ILista;
 
 public interface IGrafo {
-	// Pre: v no pertenece al grafo.
-	// 0<v<=capacidad grafo
-	// Post: Agrega el vértice v al grafo
-	public void agregarVertice(int v);
+	// Pre: se agregó un elemento
+	// Post: Agrega un vertice al grafo
+	public void agregarVertice();
 
 	// Pre: origen y destino son los índices de vértices ya ingresados en el
 	// grafo
