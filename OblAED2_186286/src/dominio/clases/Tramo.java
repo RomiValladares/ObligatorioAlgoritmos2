@@ -1,12 +1,18 @@
 package dominio.clases;
 
-public class Tramo { // no exstiende punto mapa
+import estructuras.grafo.*;
 
-	private int peso;
+public class Tramo implements IArco{ // no exstiende punto mapa
+
+	private int kilometros;
 	
 	
-	public Tramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int peso){
-		this.peso = peso;
+	public Tramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int kilometros){
+		this.kilometros = kilometros;
 	}
 	
+	@Override
+	public int getPeso(){
+		return kilometros;
+	}
 }

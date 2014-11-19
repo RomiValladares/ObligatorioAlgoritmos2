@@ -1,9 +1,10 @@
 package estructuras.grafo;
 
-public class ArcoGrafo implements IArco {
+public class ArcoGrafo {
 
 	public boolean existe;
 	private int peso;
+	IArco dato;
 
 	public ArcoGrafo() {
 		this.existe = false;
@@ -16,6 +17,6 @@ public class ArcoGrafo implements IArco {
 	}
 	
 	public int getPeso(){
-		return peso;
+		return dato==null ? peso: dato.getPeso();
 	}
 }
