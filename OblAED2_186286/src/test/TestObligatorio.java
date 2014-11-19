@@ -229,15 +229,57 @@ public class TestObligatorio {
 	// Tramo:
 	
 	@Test
+	public void registrarTramoPeso0() {
+		Sistema s = new Sistema();
+		s.inicializarSistema(5);
+		
+		s.registrarCiudad("Paysandu", -32.3105104, -58.0759192);
+		s.registrarCiudad("Salto", -31.3689985, -57.9119238);
+		
+		
+		assertEquals(TipoError.ERROR_1, s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, 0).retorno);
+	}
+	
+	@Test
 	public void registrarTramoPesoMenorIgual0() {
 		Sistema s = new Sistema();
-		s.inicializarSistema(10);
+		s.inicializarSistema(6);
 		
 		s.registrarCiudad("Paysandu", -32.3105104, -58.0759192);
 		s.registrarCiudad("Salto", -31.3689985, -57.9119238);
 		
 		
 		assertEquals(TipoError.ERROR_1, s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, -3).retorno);
+	}
+	
+	@Test
+	public void registrarTramoPosicionInicialNoExistente() {
+		Sistema s = new Sistema();
+		s.inicializarSistema(7);
+		
+		s.registrarCiudad("Salto", -31.3689985, -57.9119238);
+		
+		
+		assertEquals(TipoError.ERROR_2, s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, -3).retorno);
+	}
+	
+	@Test
+	public void registrarTramoPosicionFinalNoExistente() {
+		Sistema s = new Sistema();
+		s.inicializarSistema(8);
+		
+		s.registrarCiudad("Paysandu", -32.3105104, -58.0759192);
+		
+		
+		assertEquals(TipoError.ERROR_2, s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, -3).retorno);
+	}
+	
+	@Test
+	public void registrarTramoPosicionesNoExistentes() {
+		Sistema s = new Sistema();
+		s.inicializarSistema(9);
+		
+		assertEquals(TipoError.ERROR_2, s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, -3).retorno);
 	}
 	
 	@Test
