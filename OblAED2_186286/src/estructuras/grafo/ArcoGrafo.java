@@ -10,13 +10,13 @@ public class ArcoGrafo {
 		this.existe = false;
 		this.peso = 0;
 	}
-
+	
 	public ArcoGrafo(int peso) {
 		this.existe = true;
 		this.peso = peso;
 	}
 	
 	public int getPeso(){
-		return dato==null ? peso: dato.getPeso();
+		return dato == null ? peso: dato.getPeso();
 	}
 }

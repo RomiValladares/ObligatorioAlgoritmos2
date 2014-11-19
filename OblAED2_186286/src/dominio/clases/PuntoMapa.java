@@ -19,16 +19,17 @@ public class PuntoMapa implements IKey {
 	public PuntoMapa(Double coordX, Double coordY, Sistema.TipoPunto tipoPunto) {
 		this(coordX, coordY);
 		this.tipoPunto = tipoPunto;
+		
 		switch (tipoPunto) {
-		case APIARIO:
-			this.colorPunto = ColorPuntoMapa.AMARILLO;
-			break;
-		case CIUDAD:
-			this.colorPunto = ColorPuntoMapa.ROJO;
-			break;
-		case CENTRO_EXTRACCION:
-			this.colorPunto = ColorPuntoMapa.VERDE;
-			break;
+			case APIARIO:
+				this.colorPunto = ColorPuntoMapa.AMARILLO;
+				break;
+			case CIUDAD:
+				this.colorPunto = ColorPuntoMapa.ROJO;
+				break;
+			case CENTRO_EXTRACCION:
+				this.colorPunto = ColorPuntoMapa.VERDE;
+				break;
 		}
 	}
 
