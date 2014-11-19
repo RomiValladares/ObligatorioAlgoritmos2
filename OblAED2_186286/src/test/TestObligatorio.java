@@ -292,7 +292,7 @@ public class TestObligatorio {
 		s.registrarCiudad("Paysandu", -32.3105104, -58.0759192);
 		s.registrarCiudad("Salto", -31.3689985, -57.9119238);
 		
-		s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, 5);
+		s.registrarTramo(-32.3105104, -58.0759192, -31.3689985, -57.9119238, 2);
 		
 		assertEquals("noesta", "implementado");
 	}
